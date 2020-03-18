@@ -1,0 +1,22 @@
+SELECT DISTINCT
+  al.Num AS ConsecutiveNums
+FROM
+  (SELECT
+    @count := @count + (
+      CASE
+        WHEN @num = e.Num
+        THEN 0
+        ELSE 1
+      END
+    ) AS c,
+    e.Num,
+    @num := e.Num
+  FROM
+    LOGS e,
+    (SELECT
+      @count := 0) a,
+    (SELECT
+      @num := - 1) b) al
+GROUP BY al.c,
+  al.num
+HAVING COUNT(*) >= 3
