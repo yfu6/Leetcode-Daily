@@ -1,0 +1,6 @@
+select c.name "Employee" from(
+select a.name 
+from employee a,employee b
+where a.managerid=b.id
+and a.Salary>b.Salary
+)c
