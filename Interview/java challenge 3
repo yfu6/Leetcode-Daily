@@ -1,0 +1,28 @@
+public class App {
+
+    public boolean twoGroups3And5(int[] nums) {
+        return helper(0, nums, 0, 0);
+    }
+ 
+    // Complete the body of the method defined below.
+    // You will need arguments to this method.
+    private boolean helper (int pos, int[] nums, int left, int right) {
+     // populate the method body
+        if (pos == nums.length) {
+            if (left == right) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        if (nums[pos] % 5 == 0) {
+            return helper(pos+1, nums, left+nums[pos], right);
+        } else if (nums[pos] % 3 == 0) {
+            return helper(pos+1, nums, left, right+nums[pos]);
+        } else {
+            return helper(pos+1, nums, left+nums[pos], right) || helper(pos+1, nums, left, right+nums[pos]);
+        }
+    }
+
+}
